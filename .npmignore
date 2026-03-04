@@ -1,0 +1,12 @@
+# Rollup cache
+.rollup.cache
+
+# TypeScript
+tsconfig.json
+*.tsbuildinfo
+
+# Development
+node_modules
+src
+.gitignore
+rollup.config.js
