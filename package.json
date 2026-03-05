@@ -20,7 +20,7 @@
   "scripts": {
     "build": "rollup -c",
     "build:tsc": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "keywords": [
     "option",
@@ -30,13 +30,23 @@
   ],
   "author": "",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/helloweilei/rs-option.git"
+  },
+  "bugs": {
+    "url": "https://github.com/helloweilei/rs-option/issues"
+  },
+  "homepage": "https://github.com/helloweilei/rs-option#readme",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-typescript": "^12.3.0",
     "@types/node": "^25.3.3",
+    "@vitest/ui": "^4.0.18",
     "rollup": "^4.59.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }
