@@ -41,7 +41,7 @@ export interface Option<T> {
     flatten<U>(this: Option<Option<U>>): Option<U>;
 
     // Conversion methods
-    cloned<U>(): Option<U>;
+    cloned(): Option<T>;
 }
 
 /**
@@ -50,7 +50,7 @@ export interface Option<T> {
 export class NoneImpl implements Option<never> {
     private static instance: NoneImpl = new NoneImpl();
 
-    private constructor() {}
+    private constructor() { }
 
     static getInstance(): NoneImpl {
         return this.instance;
@@ -152,7 +152,7 @@ export class NoneImpl implements Option<never> {
     }
 
     // Conversion methods
-    cloned<U>(): Option<U> {
+    cloned(): Option<never> {
         return NoneImpl.getInstance();
     }
 
@@ -287,19 +287,31 @@ export class SomeImpl<T> implements Option<T> {
     }
 
     // Conversion methods
-    cloned<U>(): Option<U> {
-        if (typeof this.value === "object" && this.value !== null) {
-            if ("clone" in this.value && typeof this.value.clone === "function") {
-                return new SomeImpl((this.value as unknown as { clone(): U }).clone());
+    cloned(): Option<T> {
+        try {
+            if (typeof structuredClone === "function") {
+                return new SomeImpl(structuredClone(this.value));
             }
-            return new SomeImpl(JSON.parse(JSON.stringify(this.value)) as U);
+            return new SomeImpl(deepClone(this.value));
+        } catch (e) {
+            return new SomeImpl(deepClone(this.value));
         }
-        return this as unknown as Option<U>;
     }
 
     toString(): string {
         return `Some(${JSON.stringify(this.value)})`;
     }
+}
+
+
+function deepClone<T>(value: T): T {
+    if (typeof value === "object" && value !== null) {
+        if ("clone" in value && typeof value.clone === "function") {
+            return (value as unknown as { clone(): T }).clone();
+        }
+        return JSON.parse(JSON.stringify(value)) as T;
+    }
+    return value;
 }
 
 /**

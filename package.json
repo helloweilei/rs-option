@@ -1,6 +1,6 @@
 {
   "name": "rs-option",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Option type library inspired by Rust",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -26,7 +26,8 @@
     "option",
     "rust",
     "typescript",
-    "functional"
+    "functional",
+    "optional"
   ],
   "author": "",
   "license": "MIT",
@@ -46,6 +47,7 @@
     "@vitest/ui": "^4.0.18",
     "rollup": "^4.59.0",
     "ts-node": "^10.9.2",
+    "tslib": "^2.8.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   }

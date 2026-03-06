@@ -237,13 +237,13 @@ describe('Option - Conversion Methods', () => {
   it('cloned should clone object with clone method', () => {
     const obj = { value: 5, clone: () => ({ value: 5, clone: () => ({ value: 5, clone: () => obj }) }) };
     const result = Some(obj).cloned().unwrap();
-    expect((result as { value: number }).value).toBe(5);
+    expect(result.value).toBe(5);
     expect(result).not.toBe(obj);
   });
 
   it('cloned should JSON clone objects', () => {
     const obj = { value: 5 };
-    const result = Some(obj).cloned<{ value: number }>().unwrap();
+    const result = Some(obj).cloned().unwrap();
     expect(result.value).toBe(5);
     expect(result).not.toBe(obj);
   });
